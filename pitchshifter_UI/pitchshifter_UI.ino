@@ -45,7 +45,7 @@ bool update_button(Adafruit_GFX_Button *b, bool down);
 void update_text(int x, int y, String control, String color);
 
 void pressed(int i);
-void mapPot(int low, int high);
+void mapPot(int i);
 bool almost_equal(float num1, float num2, float tol);
 
 
@@ -98,21 +98,21 @@ void pressed(int i)
     while(!touched)
     {
         touched = Touch_getXY();
-        mapPot(low_vals[i],high_vals[i]);
+        mapPot(i);
     }
     update_text(0, 40*i+30, controls[i], "WHITE");
 }
 
-void mapPot(int low, int high)
+void mapPot(int i)
 {
     int pot_val;
     int mapped_val;
     pot_val = analogRead(pot);
     if(!almost_equal(last_val,pot_val,2))
     {
-        mapped_val = map(pot_val,0,1023,low,high);
-        Serial.println(last_val);
-        Serial.println(pot_val);
+        mapped_val = map(pot_val,0,1023,0,255-len);   //map 10bit to 8bit
+        Serial.write(i);                              //control id
+        Serial.write(mapped_val+len);                 //potentiometer value
         last_val = pot_val;
     }
 }
