@@ -91,7 +91,12 @@ def main():
     transposition = control("Transposition", -24, 24, "1/2 steps", 0)
     window = control("Window", 0, 2000, "ms", 0)
     delay = control("Delay", 0, 5000, "ms", 0)
-    controls = [transposition,window,delay]
+    resolution = control("Resolution",0,0,"",1)
+    controls = [transposition,window,delay,resolution]  #resolution should always be last
+
+    #Resolution
+    res_list = [0.01,0.05,0.1,0.5,1,5,10,50,100]
+    res_index = 4
 
     #Start controller
     ps = controller(controls)
@@ -126,21 +131,42 @@ def main():
                 #tuning menu
                 while ps.clicked:
 
-                    #update value and enforce limits
-                    diff = ps.getDiff()
-                    if ps.twist.has_moved():
-                        ps.controls[ps.control_index].value += diff*ps.resolution
-                        if ps.controls[ps.control_index].value < ps.controls[ps.control_index].low:
-                            ps.controls[ps.control_index].value = ps.controls[ps.control_index].low
-                        elif ps.controls[ps.control_index].value > ps.controls[ps.control_index].high:
-                            ps.controls[ps.control_index].value = ps.controls[ps.control_index].high
-                        
-                        #update lcd
-                        ps.lcd.clear()
-                        ps.lcd.message = ps.controls[ps.control_index].name + "\n" + str(ps.controls[ps.control_index].value) + " " + ps.controls[ps.control_index].unit
+                    #resolution tune
+                    if ps.control_index == len(ps.controls)-1:
 
-                        #send value to pd
-                        send2Pd(ps.control_index, ps.controls[ps.control_index].value)
+                        #update value and enforce limits
+                        diff = ps.getDiff()
+                        if ps.twist.has_moved():
+                            res_index += diff
+                            if res_index > len(res_list)-1:
+                                res_index = len(res_list)-1
+                            elif res_index < 0:
+                                res_index = 0
+                            ps.controls[-1].value = res_list[res_index]
+
+                            #update lcd
+                            ps.lcd.clear()
+                            ps.lcd.message = ps.controls[-1].name + "\n" + str(ps.controls[-1].value)
+
+
+                    #control tune
+                    else:
+
+                        #update value and enforce limits
+                        diff = ps.getDiff()
+                        if ps.twist.has_moved():
+                            ps.controls[ps.control_index].value += diff*ps.controls[-1].value
+                            if ps.controls[ps.control_index].value < ps.controls[ps.control_index].low:
+                                ps.controls[ps.control_index].value = ps.controls[ps.control_index].low
+                            elif ps.controls[ps.control_index].value > ps.controls[ps.control_index].high:
+                                ps.controls[ps.control_index].value = ps.controls[ps.control_index].high
+                            
+                            #update lcd
+                            ps.lcd.clear()
+                            ps.lcd.message = ps.controls[ps.control_index].name + "\n" + str(ps.controls[ps.control_index].value) + " " + ps.controls[ps.control_index].unit
+
+                            #send value to pd
+                            send2Pd(ps.control_index, ps.controls[ps.control_index].value)
                     
                     #check for button press
                     if ps.twist.was_clicked():
@@ -153,7 +179,7 @@ def main():
                 ps.lcd.clear()
                 ps.lcd.message = ps.controls[ps.control_index].name
 
-        time.sleep(.1)
+        time.sleep(0.1)
 
 if __name__ == '__main__':
 	try:
