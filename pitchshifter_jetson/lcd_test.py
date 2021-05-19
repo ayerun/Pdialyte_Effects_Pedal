@@ -34,12 +34,12 @@ def setup():
     return lcd
 
 def main(lcd):
-    sleep(5)
+    time.sleep(5)
     lcd.clear()
 
 if __name__ == '__main__':
 	try:
-        lcd = setup()
+		lcd = setup()
 		main(lcd)
 	except (KeyboardInterrupt, SystemExit) as exErr:
 		print("\nEnding Script")
