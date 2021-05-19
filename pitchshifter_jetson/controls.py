@@ -42,6 +42,8 @@ class controller:
         self.lcd = characterlcd.Character_LCD_Mono(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7, lcd_columns, lcd_rows, lcd_backlight)
         self.lcd.backlight = True
         self.lcd.message = self.controls[0].name + "\n" + self.controls[1].name
+        self.lcd.cursor = True
+        self.lcd.blink = True
 
         #Initialize Encoder
         self.twist = qwiic_twist.QwiicTwist()
@@ -57,9 +59,9 @@ def send2Pd(message=''):
 
 def main():
     #Make controls
-    transposition = control("transposition", -24, 24, 0)
-    window = control("window", 0, 2000, 0)
-    delay = control("delay", 0, 5000, 0)
+    transposition = control("Transposition", -24, 24, 0)
+    window = control("Window", 0, 2000, 0)
+    delay = control("Delay", 0, 5000, 0)
     controls = [transposition,window,delay]
 
     #Start controller
