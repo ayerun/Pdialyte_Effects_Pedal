@@ -69,8 +69,10 @@ class controller:
                 diff = 0
         return diff
 
-def send2Pd(message=''):
-	os.system("echo '" + message + "' | pdsend 3000")
+
+def send2Pd(index, value):
+    message = str(index) + ' ' + str(value) + ';'
+    os.system("echo '" + message + "' | pdsend 3000")
 
 def main():
     #Make controls
@@ -123,6 +125,9 @@ def main():
                         #update lcd
                         ps.lcd.clear()
                         ps.lcd.message = ps.controls[ps.control_index].name + "\n" + str(ps.controls[ps.control_index].value) + " " + ps.controls[ps.control_index].unit
+
+                        #send value to pd
+                        send2Pd(ps.control_index, ps.controls[ps.control_index].value)
                     
                     #check for button press
                     if ps.twist.was_clicked():
