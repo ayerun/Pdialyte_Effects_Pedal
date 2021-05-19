@@ -105,7 +105,7 @@ def main():
             #tuning menu
             if ps.clicked:
                 #display value
-                ps.lcd.message = ps.controls[ps.control_index].name + "\n" + ps.controls[ps.control_index].value + " " + ps.controls[ps.control_index].unit
+                ps.lcd.message = ps.controls[ps.control_index].name + "\n" + str(ps.controls[ps.control_index].value) + " " + ps.controls[ps.control_index].unit
 
             else:
                 #remove value and display control menu
