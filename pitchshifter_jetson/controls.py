@@ -125,6 +125,8 @@ def main():
                     #check for button press
                     if ps.twist.was_clicked():
                         ps.clicked = not ps.clicked
+                    
+                    time.sleep(0.1)
 
                 #remove value and display control menu
                 ps.lcd.clear()
