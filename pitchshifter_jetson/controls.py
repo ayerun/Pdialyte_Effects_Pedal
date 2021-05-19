@@ -24,6 +24,8 @@ class controller:
     def __init__(self,controls):
         #Initialize Controls
         self.controls = controls
+        self.control_index = 0
+        self.control_lim = len(controls)-1
 
         #LCD Setup
         lcd_columns = 16
@@ -41,7 +43,7 @@ class controller:
         #Initialize LCD
         self.lcd = characterlcd.Character_LCD_Mono(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7, lcd_columns, lcd_rows, lcd_backlight)
         self.lcd.backlight = True
-        self.lcd.message = self.controls[0].name + "\n" + self.controls[1].name
+        self.lcd.message = self.controls[0].name
         self.lcd.cursor = True
         self.lcd.blink = True
 
@@ -69,9 +71,25 @@ def main():
 
     #Loop
     while True:
-        print("Count: %d, Pressed: %s" % (ps.twist.count, "YES" if ps.twist.pressed else "NO",))
-        send2Pd(str(ps.twist.count) + ';')
-        time.sleep(.1)
+        # print("Count: %d, Pressed: %s" % (ps.twist.count, "YES" if ps.twist.pressed else "NO",))
+        # send2Pd(str(ps.twist.count) + ';')
+
+        #check for encoder ticks
+        diff = ps.twist.get_diff()
+        if diff != 0:
+
+            #update control index and enforce limits
+            ps.control_index += diff
+            if ps.control_index < 0:
+                ps.control_index = 0
+            elif ps.control_index > control_lim:
+                ps.control_index = control_lim
+            
+            #update lcd
+            ps.lcd.clear()
+            ps.lcd.message = self.controls[control_index].name
+            
+        time.sleep(.05)
 
 if __name__ == '__main__':
 	try:
