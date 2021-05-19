@@ -8,8 +8,9 @@ import os
 
 class control:
 
-    def __init__(self,title,low_lim,high_lim,val=0):
+    def __init__(self,title,low_lim,high_lim,unit,val=0):
         self.name = title
+        self.unit = unit
         self.low = low_lim
         self.high = high_lim
         self.value = val
@@ -20,7 +21,11 @@ class controller:
     resolution = 1
     res_list = [0.01,0.05,0.1,0.5,1,5,10,50,100]
 
+    #Last encoder count
     count = 0
+
+    #false while in control menu true while in tuning menu
+    clicked = False
 
     #constructor
     def __init__(self,controls):
@@ -56,6 +61,7 @@ class controller:
         self.twist.set_color(255, 0, 0) #set color to red
         self.twist.set_count(0)
     
+    #returns difference from last encoder count
     def getDiff(self):
         diff = self.twist.count-self.count
         self.count = self.twist.count
@@ -66,9 +72,9 @@ def send2Pd(message=''):
 
 def main():
     #Make controls
-    transposition = control("Transposition", -24, 24, 0)
-    window = control("Window", 0, 2000, 0)
-    delay = control("Delay", 0, 5000, 0)
+    transposition = control("Transposition", -24, 24, "1/2 steps", 0)
+    window = control("Window", 0, 2000, "ms", 0)
+    delay = control("Delay", 0, 5000, "ms", 0)
     controls = [transposition,window,delay]
 
     #Start controller
@@ -76,12 +82,9 @@ def main():
 
     #Loop
     while True:
-        # print("Count: %d, Pressed: %s" % (ps.twist.count, "YES" if ps.twist.pressed else "NO",))
-        # send2Pd(str(ps.twist.count) + ';')
 
         #check for encoder ticks
         diff = ps.getDiff()
-        print(diff)
         if ps.twist.has_moved():
 
             #update control index and enforce limits
@@ -94,6 +97,20 @@ def main():
             #update lcd
             ps.lcd.clear()
             ps.lcd.message = ps.controls[ps.control_index].name
+
+        #check for button press
+        if ps.twist.was_clicked():
+            ps.clicked = not ps.clicked
+
+            #tuning menu
+            if ps.clicked:
+                #display value
+                ps.lcd.message = ps.controls[ps.control_index].name + "\n" + ps.controls[ps.control_index].value + " " + ps.controls[ps.control_index].unit
+
+            else:
+                #remove value and display control menu
+                ps.lcd.clear()
+                ps.lcd.message = ps.controls[ps.control_index].name
 
         time.sleep(.1)
 
