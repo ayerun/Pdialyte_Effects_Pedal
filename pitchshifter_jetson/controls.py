@@ -102,12 +102,30 @@ def main():
         if ps.twist.was_clicked():
             ps.clicked = not ps.clicked
 
-            #tuning menu
+            #display tuning menu
             if ps.clicked:
-                #display value
                 ps.lcd.message = ps.controls[ps.control_index].name + "\n" + str(ps.controls[ps.control_index].value) + " " + ps.controls[ps.control_index].unit
 
-            else:
+                #tuning menu
+                while ps.clicked:
+
+                    #update value and enforce limits
+                    diff = ps.getDiff()
+                    if ps.twist.has_moved():
+                        ps.controls[ps.control_index].value += diff*ps.resolution
+                        if ps.controls[ps.control_index].value < ps.controls[ps.control_index].low:
+                            ps.controls[ps.control_index].value = ps.controls[ps.control_index].low
+                        elif ps.controls[ps.control_index].value > ps.controls[ps.control_index].high:
+                            ps.controls[ps.control_index].value = ps.controls[ps.control_index].high
+                        
+                        #update lcd
+                        ps.lcd.clear()
+                        ps.lcd.message = ps.controls[ps.control_index].name + "\n" + str(ps.controls[ps.control_index].value) + " " + ps.controls[ps.control_index].unit
+                    
+                    #check for button press
+                    if ps.twist.was_clicked():
+                        ps.clicked = not ps.clicked
+
                 #remove value and display control menu
                 ps.lcd.clear()
                 ps.lcd.message = ps.controls[ps.control_index].name
