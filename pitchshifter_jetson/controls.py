@@ -82,13 +82,13 @@ def main():
             ps.control_index += diff
             if ps.control_index < 0:
                 ps.control_index = 0
-            elif ps.control_index > control_lim:
-                ps.control_index = control_lim
+            elif ps.control_index > ps.control_lim:
+                ps.control_index = ps.control_lim
             
             #update lcd
             ps.lcd.clear()
             ps.lcd.message = self.controls[control_index].name
-            
+
         time.sleep(.05)
 
 if __name__ == '__main__':
