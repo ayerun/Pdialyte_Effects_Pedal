@@ -17,15 +17,8 @@ class control:
 
 class controller:
 
-    #Encoder Resolution
-    resolution = 1
-    res_list = [0.01,0.05,0.1,0.5,1,5,10,50,100]
-
-    #Last encoder count
-    count = 0
-
-    #false while in control menu true while in tuning menu
-    clicked = False
+    count = 0           #last encoder count
+    clicked = False     #false while in control menu true while in tuning menu
 
     #constructor
     def __init__(self,controls):
@@ -96,7 +89,10 @@ def main():
 
     #Resolution
     res_list = [0.01,0.05,0.1,0.5,1,5,10,50,100]
-    res_index = 4
+    try:
+        res_index = res_list.index(1)
+    except:
+        res_index = 0
 
     #Start controller
     ps = controller(controls)
