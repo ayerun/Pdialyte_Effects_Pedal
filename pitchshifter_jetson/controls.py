@@ -145,6 +145,7 @@ def main():
                     #check for button press
                     if ps.twist.was_clicked():
                         ps.clicked = not ps.clicked
+                        ps.changeColor()
                     
                     time.sleep(0.1)
 
