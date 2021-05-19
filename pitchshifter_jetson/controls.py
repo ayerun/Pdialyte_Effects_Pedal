@@ -14,6 +14,12 @@ class controller:
     delay = 0
     resolution = 1
 
+    #limits
+    t_lim = [-24,24]
+    w_lim = [0,2000]
+    delay_lim = [0,10000]
+    res_list = [0.01,0.05,0.1,0.5,1,5,10,50,100]
+
     #constructor
     def __init__(self):
 
@@ -33,6 +39,7 @@ class controller:
         #Initialize LCD
         self.lcd = characterlcd.Character_LCD_Mono(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7, lcd_columns, lcd_rows, lcd_backlight)
         self.lcd.backlight = True
+        self.lcd.message = "Transposition\nWindow"
 
         #Initialize Encoder
         self.twist = qwiic_twist.QwiicTwist()
@@ -50,9 +57,6 @@ def main():
 
     #Start controller
     ps = controller()
-
-    #Print a two line message
-    ps.lcd.message = "Hello\nWorld"
 
     #Loop
     while True:
