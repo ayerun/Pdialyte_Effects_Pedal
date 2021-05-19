@@ -22,7 +22,7 @@ def runExample():
 
 	while True:
 
-		print("Count: %d, Pressed: %s" % (myTwist.count, "YES" if myTwist.pressed else "NO",))
+		print("Count: %d, Difference: %d, Pressed: %s" % (myTwist.count, myTwist.get_diff(), "YES" if myTwist.pressed else "NO",))
 		send2Pd(str(myTwist.count) + ';')
 		time.sleep(.1)
 

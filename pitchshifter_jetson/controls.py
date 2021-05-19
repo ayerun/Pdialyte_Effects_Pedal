@@ -44,8 +44,6 @@ class controller:
         self.lcd = characterlcd.Character_LCD_Mono(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7, lcd_columns, lcd_rows, lcd_backlight)
         self.lcd.backlight = True
         self.lcd.message = self.controls[0].name
-        self.lcd.cursor = True
-        self.lcd.blink = True
 
         #Initialize Encoder
         self.twist = qwiic_twist.QwiicTwist()
@@ -54,7 +52,7 @@ class controller:
             sys.exit(0)
         self.twist.begin()
         self.twist.set_color(255, 0, 0) #set color to red
-
+        self.twist.set_count(0)
 
 def send2Pd(message=''):
 	os.system("echo '" + message + "' | pdsend 3000")
@@ -75,8 +73,10 @@ def main():
         # send2Pd(str(ps.twist.count) + ';')
 
         #check for encoder ticks
+        diff = 0
         diff = ps.twist.get_diff()
-        if diff != 0:
+        print(diff)
+        if ps.twist.has_moved():
 
             #update control index and enforce limits
             ps.control_index += diff
@@ -89,7 +89,7 @@ def main():
             ps.lcd.clear()
             ps.lcd.message = ps.controls[ps.control_index].name
 
-        time.sleep(.05)
+        time.sleep(.1)
 
 if __name__ == '__main__':
 	try:
