@@ -69,6 +69,18 @@ class controller:
                 diff = 0
         return diff
 
+    #change encoder color between red and green
+    def changeColor(self):
+        red = self.twist.get_red()
+        if red > 0:
+            for i in range(256):
+                self.twist.set_color(255-i,0+i,0)
+                time.sleep(0.001)
+        else:
+            for i in range(256):
+                self.twist.set_color(0+i,255-i,0)
+                time.sleep(0.001)
+
 
 def send2Pd(index, value):
     message = str(index) + ' ' + str(value) + ';'
@@ -109,6 +121,7 @@ def main():
             #display tuning menu
             if ps.clicked:
                 ps.lcd.message = ps.controls[ps.control_index].name + "\n" + str(ps.controls[ps.control_index].value) + " " + ps.controls[ps.control_index].unit
+                ps.changeColor()
 
                 #tuning menu
                 while ps.clicked:
