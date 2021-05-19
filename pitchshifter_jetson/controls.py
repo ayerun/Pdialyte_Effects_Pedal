@@ -6,22 +6,24 @@ import qwiic_twist
 import sys
 import os
 
+class control:
+
+    def __init__(self,title,low_lim,high_lim,val=0):
+        self.name = title
+        self.low = low_lim
+        self.high = high_lim
+        self.value = val
+
 class controller:
 
-    #controls
-    transposition = 0
-    window = 0
-    delay = 0
+    #Encoder Resolution
     resolution = 1
-
-    #limits
-    t_lim = [-24,24]
-    w_lim = [0,2000]
-    delay_lim = [0,10000]
     res_list = [0.01,0.05,0.1,0.5,1,5,10,50,100]
 
     #constructor
-    def __init__(self):
+    def __init__(self,controls):
+        #Initialize Controls
+        self.controls = controls
 
         #LCD Setup
         lcd_columns = 16
@@ -39,7 +41,7 @@ class controller:
         #Initialize LCD
         self.lcd = characterlcd.Character_LCD_Mono(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7, lcd_columns, lcd_rows, lcd_backlight)
         self.lcd.backlight = True
-        self.lcd.message = "Transposition\nWindow"
+        self.lcd.message = self.controls[0].name + "\n" + self.controls[1].name
 
         #Initialize Encoder
         self.twist = qwiic_twist.QwiicTwist()
@@ -54,9 +56,14 @@ def send2Pd(message=''):
 	os.system("echo '" + message + "' | pdsend 3000")
 
 def main():
+    #Make controls
+    transposition = control("transposition", -24, 24, 0)
+    window = control("window", 0, 2000, 0)
+    delay = control("delay", 0, 5000, 0)
+    controls = [transposition,window,delay]
 
     #Start controller
-    ps = controller()
+    ps = controller(controls)
 
     #Loop
     while True:
