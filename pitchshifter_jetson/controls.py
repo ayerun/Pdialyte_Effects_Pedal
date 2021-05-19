@@ -87,7 +87,7 @@ def main():
             
             #update lcd
             ps.lcd.clear()
-            ps.lcd.message = self.controls[control_index].name
+            ps.lcd.message = ps.controls[ps.control_index].name
 
         time.sleep(.05)
 
