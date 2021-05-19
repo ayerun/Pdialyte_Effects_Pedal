@@ -163,7 +163,7 @@ def main():
                             
                             #update lcd
                             ps.lcd.clear()
-                            ps.lcd.message = ps.controls[ps.control_index].name + "\n" + str(ps.controls[ps.control_index].value) + " " + ps.controls[ps.control_index].unit
+                            ps.lcd.message = ps.controls[ps.control_index].name + "\n" + str(round(ps.controls[ps.control_index].value,2)) + " " + ps.controls[ps.control_index].unit
 
                             #send value to pd
                             send2Pd(ps.control_index, ps.controls[ps.control_index].value)
