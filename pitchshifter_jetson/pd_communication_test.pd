@@ -1,0 +1,4 @@
+#N canvas 992 84 928 996 10;
+#X obj 209 61 netreceive 3000;
+#X floatatom 216 124 5 0 0 0 - - -, f 5;
+#X connect 0 0 1 0;
