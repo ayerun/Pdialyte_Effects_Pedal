@@ -30,19 +30,19 @@ def main():
 
     #Initialize Encoder
     twist = qwiic_twist.QwiicTwist()
-    if myTwist.connected == False:
+    if twist.connected == False:
         print("The Qwiic twist device isn't connected to the system. Please check your connection", file=sys.stderr)
         return
-    myTwist.begin()
-    myTwist.set_color(255, 0, 0) #set color to red
+    twist.begin()
+    twist.set_color(255, 0, 0) #set color to red
 
     # Print a two line message
     lcd.message = "Hello\nWorld"
 
     #Loop
     while True:
-        print("Count: %d, Pressed: %s" % (myTwist.count, "YES" if myTwist.pressed else "NO",))
-        send2Pd(str(myTwist.count) + ';')
+        print("Count: %d, Pressed: %s" % (twist.count, "YES" if twist.pressed else "NO",))
+        send2Pd(str(twist.count) + ';')
         time.sleep(.1)
 
 if __name__ == '__main__':
