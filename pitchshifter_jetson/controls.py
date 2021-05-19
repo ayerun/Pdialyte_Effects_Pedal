@@ -65,6 +65,8 @@ class controller:
     def getDiff(self):
         diff = self.twist.count-self.count
         self.count = self.twist.count
+        if abs(diff) > 60000:
+                diff = 0
         return diff
 
 def send2Pd(message=''):
