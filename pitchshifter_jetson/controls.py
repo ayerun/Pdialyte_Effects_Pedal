@@ -9,7 +9,7 @@ import os
 def send2Pd(message=''):
 	os.system("echo '" + message + "' | pdsend 3000")
 
-def setup():
+def main():
 
     #LCD Setup
     lcd_columns = 16
@@ -28,19 +28,26 @@ def setup():
     lcd = characterlcd.Character_LCD_Mono(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7, lcd_columns, lcd_rows, lcd_backlight)
     lcd.backlight = True
 
+    #Initialize Encoder
+    twist = qwiic_twist.QwiicTwist()
+    if myTwist.connected == False:
+        print("The Qwiic twist device isn't connected to the system. Please check your connection", file=sys.stderr)
+        return
+    myTwist.begin()
+    myTwist.set_color(255, 0, 0) #set color to red
+
     # Print a two line message
     lcd.message = "Hello\nWorld"
 
-    return lcd
-
-def main(lcd):
-    time.sleep(5)
-    lcd.clear()
+    #Loop
+    while True:
+        print("Count: %d, Pressed: %s" % (myTwist.count, "YES" if myTwist.pressed else "NO",))
+        send2Pd(str(myTwist.count) + ';')
+        time.sleep(.1)
 
 if __name__ == '__main__':
 	try:
-		lcd = setup()
-		main(lcd)
+		main()
 	except (KeyboardInterrupt, SystemExit) as exErr:
 		print("\nEnding Script")
 		sys.exit(0)
