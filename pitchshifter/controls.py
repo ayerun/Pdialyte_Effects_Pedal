@@ -28,6 +28,9 @@ class controller:
         self.control_index = 0
         self.control_lim = len(controls)-1
 
+        #Initialize Button
+        self.button = digitalio.DigitalInOut(board.D8)
+
         #LCD Setup
         lcd_columns = 16
         lcd_rows = 2
@@ -75,13 +78,15 @@ class controller:
                 self.twist.set_color(0+i,255-i,0)
                 time.sleep(0.001)
 
+    #check button status
+    def buttonInterrupt(self):
+        if self.button.value == False:
+            send2Pd(99,1)
+            time.sleep(0.4)
 
 def send2Pd(index, value):
     message = str(index) + ' ' + str(value) + ';'
     os.system("echo '" + message + "' | pdsend 3000")
-
-def button_callback(channel):
-    send2Pd(99,1)
 
 def main():
     #Make controls
@@ -97,12 +102,6 @@ def main():
         res_index = res_list.index(1)
     except:
         res_index = 0
-
-    #Initialize Button Interrupt
-    button_pin = 8
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(button, GPIO.IN)
-    GPIO.add_event_detect(button_pin, GPIO.FALLING, callback=button_callback, bouncetime=500)
 
     #Start controller
     ps = controller(controls)
@@ -126,6 +125,9 @@ def main():
             ps.lcd.message = ps.controls[ps.control_index].name
 
         #check for button press
+        ps.buttonInterrupt()
+
+        #check for encoder button press
         if ps.twist.was_clicked():
             ps.clicked = not ps.clicked
 
@@ -174,7 +176,7 @@ def main():
                             #send value to pd
                             send2Pd(ps.control_index, ps.controls[ps.control_index].value)
                     
-                    #check for button press
+                    #check for encoder button press
                     if ps.twist.was_clicked():
                         ps.clicked = not ps.clicked
                         ps.changeColor()
