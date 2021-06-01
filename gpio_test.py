@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 
-button = 6
+button = 8
 
 def button_back(channel):
     print("Button Pressed!")
@@ -11,7 +11,7 @@ def button_back(channel):
 def main():
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(button, GPIO.IN)
-    GPIO.add_event_detect(button, GPIO.FALLING, callback=button_back, bouncetime=10)
+    GPIO.add_event_detect(button, GPIO.FALLING, callback=button_back, bouncetime=500)
 
     try:
         while True:
