@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 
-button = 8
+button = 6
 
 def button_back(channel):
     print("Button Pressed!")
