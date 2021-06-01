@@ -56,7 +56,7 @@ class controller:
             print("The Qwiic twist device isn't connected to the system. Please check your connection", file=sys.stderr)
             sys.exit(0)
         self.twist.begin()
-        self.twist.set_color(255, 0, 0) #set color to red
+        self.twist.set_color(0, 255, 0) #set color to green
         self.twist.set_count(0)
     
     #returns difference from last encoder count
@@ -85,6 +85,7 @@ class controller:
         #check is pedal has been pressed
         if self.button.value == False:
             self.button_status = not self.button_status
+            self.changeColor()
             time.sleep(0.4)
         
         #send 1 if pedal is on
@@ -145,7 +146,6 @@ def main():
             #display tuning menu
             if ps.clicked:
                 ps.lcd.message = ps.controls[ps.control_index].name + "\n" + str(ps.controls[ps.control_index].value) + " " + ps.controls[ps.control_index].unit
-                ps.changeColor()
 
                 #tuning menu
                 while ps.clicked:
@@ -190,7 +190,6 @@ def main():
                     #check for encoder button press
                     if ps.twist.was_clicked():
                         ps.clicked = not ps.clicked
-                        ps.changeColor()
                     
                     time.sleep(0.1)
 
