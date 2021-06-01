@@ -1,9 +1,11 @@
 import digitalio
 import board
 import time
+import sys
 
 def main():
-    pin = digitalio.DigitalInOut(D8)
+    pin = digitalio.DigitalInOut(board.D8)
+    pin.switch_to_input()
     while True:
         print(pin.value)
         time.sleep(0.1)
