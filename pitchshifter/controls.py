@@ -204,5 +204,5 @@ if __name__ == '__main__':
 	try:
 		main()
 	except (KeyboardInterrupt, SystemExit) as exErr:
-        print("\nEnding Script")
-        sys.exit(0)
+		print("\nEnding Script")
+		sys.exit(0)
