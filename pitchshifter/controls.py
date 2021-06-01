@@ -30,6 +30,7 @@ class controller:
 
         #Initialize Button
         self.button = digitalio.DigitalInOut(board.D8)
+        self.button_status = True
 
         #LCD Setup
         lcd_columns = 16
@@ -80,9 +81,19 @@ class controller:
 
     #check button status
     def buttonInterrupt(self):
+        
+        #check is pedal has been pressed
         if self.button.value == False:
-            send2Pd(99,1)
+            self.button_status = not self.button_status
             time.sleep(0.4)
+        
+        #send 1 if pedal is on
+        if self.button_status:
+            send2Pd(99,1)
+        
+        #send 0 if pedal is off
+        else:
+            send2Pd(99,0)
 
 def send2Pd(index, value):
     message = str(index) + ' ' + str(value) + ';'
@@ -193,6 +204,5 @@ if __name__ == '__main__':
 	try:
 		main()
 	except (KeyboardInterrupt, SystemExit) as exErr:
-        GPIO.cleanup()
         print("\nEnding Script")
         sys.exit(0)
