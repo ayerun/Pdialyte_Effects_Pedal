@@ -11,7 +11,7 @@ def main():
         while True:
             GPIO.wait_for_edge(button, GPIO.FALLING)
             print("Button Pressed!")
-            time.sleep(0.1)
+            GPIO.cleanup()
     finally:
         GPIO.cleanup()
 
