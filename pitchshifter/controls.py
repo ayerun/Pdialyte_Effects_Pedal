@@ -1,5 +1,6 @@
 import time
 import digitalio
+import RPi.GPIO as GPIO
 import adafruit_character_lcd.character_lcd as characterlcd
 import board
 import qwiic_twist
@@ -79,6 +80,9 @@ def send2Pd(index, value):
     message = str(index) + ' ' + str(value) + ';'
     os.system("echo '" + message + "' | pdsend 3000")
 
+def button_callback(channel):
+    send2Pd(99,1)
+
 def main():
     #Make controls
     transposition = control("Transposition", -24, 24, "1/2 steps", 0)
@@ -93,6 +97,12 @@ def main():
         res_index = res_list.index(1)
     except:
         res_index = 0
+
+    #Initialize Button Interrupt
+    button_pin = 8
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(button, GPIO.IN)
+    GPIO.add_event_detect(button_pin, GPIO.FALLING, callback=button_callback, bouncetime=500)
 
     #Start controller
     ps = controller(controls)
@@ -181,5 +191,6 @@ if __name__ == '__main__':
 	try:
 		main()
 	except (KeyboardInterrupt, SystemExit) as exErr:
-		print("\nEnding Script")
-		sys.exit(0)
+        GPIO.cleanup()
+        print("\nEnding Script")
+        sys.exit(0)
