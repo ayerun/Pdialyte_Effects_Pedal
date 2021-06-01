@@ -1,4 +1,4 @@
-#N canvas 902 84 928 996 10;
+#N canvas 857 84 928 996 10;
 #X obj 327 86 netreceive 3000;
 #X obj 45 275 * 0.05776;
 #X obj 45 308 exp;
@@ -39,7 +39,7 @@
 #X text 401 240 window (ms);
 #X text 582 241 delay (ms);
 #X floatatom 532 244 5 0 0 0 - - -, f 5;
-#X obj 45 186 loadbang;
+#X obj 45 88 loadbang;
 #X obj 671 206 adc~;
 #X obj 59 840 dac~;
 #X obj 327 130 route 0 1 2 99;
@@ -54,6 +54,7 @@
 #X obj 805 352 s~ \$0-cleanSignal;
 #X obj 89 780 r~ \$0-cleanSignal;
 #X obj 637 312 *~ 1;
+#X msg 60 128 \; pd dsp 1;
 #X connect 0 0 43 0;
 #X connect 1 0 2 0;
 #X connect 2 0 3 0;
@@ -99,6 +100,7 @@
 #X connect 35 0 23 0;
 #X connect 39 0 29 0;
 #X connect 40 0 32 0;
+#X connect 40 0 55 0;
 #X connect 41 0 46 0;
 #X connect 41 0 54 0;
 #X connect 41 1 46 0;
