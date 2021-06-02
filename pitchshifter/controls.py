@@ -108,10 +108,11 @@ def send2Pd(index, value):
 def main():
     #Make controls
     transposition = control("Transposition", -24, 24, "1/2 steps", 0)
-    window = control("Window", 0, 2000, "ms", 0)
+    window = control("Window", 0, 2000, "ms", 100)
     delay = control("Delay", 0, 5000, "ms", 0)
+    wet = control("Wet", 0, 100, "%", 50)
     resolution = control("Resolution",0,0,"",1)
-    controls = [transposition,window,delay,resolution]  #resolution should always be last
+    controls = [transposition,window,delay,wet,resolution]  #resolution should always be last
 
     #Resolution
     res_list = [0.01,0.05,0.1,0.5,1,5,10,50,100]
