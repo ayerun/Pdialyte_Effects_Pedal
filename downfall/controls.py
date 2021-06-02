@@ -117,10 +117,10 @@ def main():
     except:
         res_index = 0
 
-    #Start controller
+    #Start controller and initialize control values
     ps = controller(controls)
-    for i in ps.controls:
-        send2Pd(i,ps.controls.value)
+    for i in range(len(ps.controls)):
+        send2Pd(i,ps.controls[i].value)
 
     #Loop
     while True:
