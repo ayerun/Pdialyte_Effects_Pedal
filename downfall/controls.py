@@ -105,7 +105,7 @@ def main():
     #Make controls
     wet = control(title="Wet", low_lim=0, high_lim=100, unit="%", val=50)
     feedback = control(title="Feedback", low_lim=0, high_lim=95, unit="%", val=50)
-    speed = control(title="Speed", low_lim=0, high_lim=5, unit="", val=0.5)
+    speed = control(title="Speed", low_lim=0, high_lim=1, unit="", val=0.5)
     depth = control(title="Depth", low_lim=0, high_lim=1000, unit="", val=300)
     resolution = control("Resolution",0,0,"",1)
     controls = [wet,feedback,speed,depth,resolution]  #resolution should always be last
@@ -119,6 +119,8 @@ def main():
 
     #Start controller
     ps = controller(controls)
+    for i in ps.controls:
+        send2Pd(i,ps.controls.value)
 
     #Loop
     while True:
