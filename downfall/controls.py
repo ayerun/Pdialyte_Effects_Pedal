@@ -58,6 +58,10 @@ class controller:
         self.twist.begin()
         self.twist.set_color(0, 255, 0) #set color to green
         self.twist.set_count(0)
+
+        #Initialize Control Values
+        for i in range(len(self.controls)):
+            send2Pd(i,self.controls[i].value)
     
     #returns difference from last encoder count
     def getDiff(self):
@@ -117,10 +121,8 @@ def main():
     except:
         res_index = 0
 
-    #Start controller and initialize control values
+    #Start controller
     ps = controller(controls)
-    for i in range(len(ps.controls)):
-        send2Pd(i,ps.controls[i].value)
 
     #Loop
     while True:
