@@ -2,7 +2,7 @@
 ### Author: Arun Kumar
 * Software and hardware design for a sound effect pedal with user created effects. See <a href="https://ayerun.github.io/Portfolio/Pdialyte.html" target="_blank">this portfolio post</a> for more information.
 
-#### Jetson Nano Setup
+## Jetson Nano Setup
 1. Install Dependencies
 ```
 sudo apt install -y python3 git python3-pip
@@ -38,7 +38,7 @@ sudo cp ~/jetson-gpio/lib/python/Jetson/GPIO/99-gpio.rules /etc/udev/rules.d
     7. Close Pd
 
 
-#### Wiring
+## Wiring
 * Encoder
     * 3.3V -> 3.3V
     * GND -> GND
@@ -66,7 +66,7 @@ sudo cp ~/jetson-gpio/lib/python/Jetson/GPIO/99-gpio.rules /etc/udev/rules.d
     * Terminal 2 -> V0 (LCD)
     * Terminal 3 -> GND
 
-#### Usage Instructions
+## Usage Instructions
 
 1. Plug in Audio Interface
 2. Launch effect
@@ -74,7 +74,7 @@ sudo cp ~/jetson-gpio/lib/python/Jetson/GPIO/99-gpio.rules /etc/udev/rules.d
 ./<path_to_repo>/Effects_Library/<desire_sound_effect_directory>/start.sh
 ```
 
-#### Repository Layout
+## Repository Layout
 * CAD directory contains 3D models of the pedal
 * Effects_Library contains all the sound effects
     * Each effect has its own folder
@@ -86,7 +86,7 @@ sudo cp ~/jetson-gpio/lib/python/Jetson/GPIO/99-gpio.rules /etc/udev/rules.d
             * both outlets are the audio clean audio signal but only one outlet is on at a time.
         * start.sh is a bash script to start the sound effect
 
-#### Creating New Sound Effects
+## Creating New Sound Effects
 * Copy NEW_EFFECT_TEMPLATE directory
 * Modify <a href="https://github.com/ayerun/Pdialyte_Effects_Pedal/blob/master/Effects_Library/NEW_EFFECT_TEMPLATE/controls.py" target="_blank">controls.py</a> with your effect parameters
     * There are detailed instructions in <a href="https://github.com/ayerun/Pdialyte_Effects_Pedal/blob/master/Effects_Library/NEW_EFFECT_TEMPLATE/controls.py" target="_blank">controls.py</a>
