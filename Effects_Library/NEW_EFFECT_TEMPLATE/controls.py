@@ -123,7 +123,14 @@ def main():
     control4 = control(title="Wet",            low_lim=0,      high_lim=100,   unit="%",           value=50)
     control5 = control(title="Resolution",     low_lim=0,      high_lim=0,     unit="",            value=1)  #DO NOT CHANGE THIS LINE
     controls = [control1,control2,control3,control4,control5]   #resolution should always be last
+    '''
 
+    control1 = control(title="",            low_lim=0,  high_lim=0, unit="",    value=0)
+    control2 = control(title="",            low_lim=0,  high_lim=0, unit="",    value=0)
+    control3 = control(title="Resolution",  low_lim=0,  high_lim=0, unit="",    value=1) #DO NOT CHANGE THIS LINE
+    controls = [control1,control2,control3]  #resolution should always be last
+
+    '''
     In Pd:
     control1 will be sent to Pd in format '0 control_value' use route object accordingly
     control2 will be sent to Pd in format '1 control_value' use route object accordingly
@@ -132,10 +139,6 @@ def main():
     control5 (Resoltuion) will not be send to Pd
     The last output of the route object should be 99 connected to a pedal_input~ object for the stomp button toggle
     '''
-    control1 = control(title="",            low_lim=0,  high_lim=0, unit="",    value=0)
-    control2 = control(title="",            low_lim=0,  high_lim=0, unit="",    value=0)
-    control3 = control(title="Resolution",  low_lim=0,  high_lim=0, unit="",    value=1) #DO NOT CHANGE THIS LINE
-    controls = [control1,control2,control3]  #resolution should always be last
 
     #Resolution
     res_list = [0.01,0.05,0.1,0.5,1,5,10,50,100]

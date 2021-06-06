@@ -69,27 +69,27 @@ sudo cp ~/jetson-gpio/lib/python/Jetson/GPIO/99-gpio.rules /etc/udev/rules.d
 #### Usage Instructions
 
 1. Plug in Audio Interface
+2. Launch effect
 ```
 ./<path_to_repo>/Effects_Library/<desire_sound_effect_directory>/start.sh
 ```
 
 #### Repository Layout
 * CAD directory contains 3D models of the pedal
-* Effects_Library contain all the sound effects
-    * Each Effect has its own folder
+* Effects_Library contains all the sound effects
+    * Each effect has its own folder
     * Each folder contains a controls.py, effect.pd, pedal_input~.pd, and start.sh file
-        * effect.pd is the Pd path with the sound effect
+        * effect.pd is the Pd patch with the sound effect
         * controls.py is the Python script that controls all pedal peripherals
         * pedal_input~.pd is a subpatch used in effect.pd to turn the sound effect on/off when the stomp button is pressed
-            * it inputs a 0 or 1
+            * inputs a 0 or 1
             * both outlets are the audio clean audio signal but only one outlet is on at a time.
         * start.sh is a bash script to start the sound effect
 
 #### Creating New Sound Effects
-* Create and effect directory
-* Copy controls_template.py, start.sh, and pedal_input~.pd into your directory
-* Modify controls_template.py with your effect parameters
-    * See this post for more details
+* Copy NEW_EFFECT_TEMPLATE directory
+* Modify <a href="https://github.com/ayerun/Guitar_Pedal/blob/master/Effects_Library/NEW_EFFECT_TEMPLATE/controls_template.py" target="_blank">controls.py</a> with your effect parameters
+    * There are detailed instructions in <a href="https://github.com/ayerun/Guitar_Pedal/blob/master/Effects_Library/NEW_EFFECT_TEMPLATE/controls_template.py" target="_blank">controls.py</a>
 * Create an effect.pd patch
-    * See this post for more details
+* See this post for more details
     
