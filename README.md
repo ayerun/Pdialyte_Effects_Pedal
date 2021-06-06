@@ -1,6 +1,6 @@
 # Pdialyte Effects Pedal
 ### Author: Arun Kumar
-* Software and hardware design for a sound effect pedal with user created effects. See this post for more information.
+* Software and hardware design for a sound effect pedal with user created effects. See <a href="https://ayerun.github.io/Portfolio/Pdialyte.html" target="_blank">this portfolio post</a> for more information.
 
 #### Jetson Nano Setup
 1. Install Dependencies
@@ -88,8 +88,8 @@ sudo cp ~/jetson-gpio/lib/python/Jetson/GPIO/99-gpio.rules /etc/udev/rules.d
 
 #### Creating New Sound Effects
 * Copy NEW_EFFECT_TEMPLATE directory
-* Modify <a href="https://github.com/ayerun/Guitar_Pedal/blob/master/Effects_Library/NEW_EFFECT_TEMPLATE/controls_template.py" target="_blank">controls.py</a> with your effect parameters
-    * There are detailed instructions in <a href="https://github.com/ayerun/Guitar_Pedal/blob/master/Effects_Library/NEW_EFFECT_TEMPLATE/controls_template.py" target="_blank">controls.py</a>
+* Modify <a href="https://github.com/ayerun/Guitar_Pedal/blob/master/Effects_Library/NEW_EFFECT_TEMPLATE/controls.py" target="_blank">controls.py</a> with your effect parameters
+    * There are detailed instructions in <a href="https://github.com/ayerun/Guitar_Pedal/blob/master/Effects_Library/NEW_EFFECT_TEMPLATE/controls.py" target="_blank">controls.py</a>
 * Create an effect.pd patch
-* See this post for more details
+* See <a href="https://ayerun.github.io/Portfolio/Pdialyte.html" target="_blank">this portfolio post</a> for more details
     
