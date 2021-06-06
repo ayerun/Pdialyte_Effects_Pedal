@@ -1,6 +1,7 @@
 # Pdialyte Effects Pedal
 ### Author: Arun Kumar
 * Software and hardware design for a sound effect pedal with user created effects. See <a href="https://ayerun.github.io/Portfolio/Pdialyte.html" target="_blank">this portfolio post</a> for more information.
+<iframe width="560" height="315" src="https://www.youtube.com/embed/IDm-Hvlwirs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 #### Jetson Nano Setup
 1. Install Dependencies
