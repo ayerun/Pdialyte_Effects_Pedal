@@ -9,12 +9,12 @@ import os
 
 class control:
 
-    def __init__(self,title,low_lim,high_lim,unit,val=0):
+    def __init__(self,title,low_lim,high_lim,unit,value=0):
         self.name = title
         self.unit = unit
         self.low = low_lim
         self.high = high_lim
-        self.value = val
+        self.value = value
 
 class controller:
 
@@ -23,6 +23,7 @@ class controller:
 
     #constructor
     def __init__(self,controls):
+
         #Initialize Controls
         self.controls = controls
         self.control_index = 0
@@ -107,12 +108,12 @@ def send2Pd(index, value):
 def main():
 
     #Make controls
-    wet = control(title="Wet", low_lim=0, high_lim=100, unit="%", val=50)
-    feedback = control(title="Feedback", low_lim=0, high_lim=95, unit="%", val=50)
-    speed = control(title="Speed", low_lim=0, high_lim=1, unit="", val=0.5)
-    depth = control(title="Depth", low_lim=0, high_lim=1000, unit="", val=300)
-    resolution = control("Resolution",0,0,"",1)
-    controls = [wet,feedback,speed,depth,resolution]  #resolution should always be last
+    control1 = control(title="Wet",         low_lim=0,  high_lim=100,   unit="%",   value=50)
+    control2 = control(title="Feedback",    low_lim=0,  high_lim=95,    unit="%",   value=50)
+    control3 = control(title="Speed",       low_lim=0,  high_lim=1,     unit="",    value=0.5)
+    control4 = control(title="Depth",       low_lim=0,  high_lim=100,   unit="",    value=300)
+    control5 = control(title="Resolution",  low_lim=0,  high_lim=0,     unit="",    value=1)
+    controls = [control1,control2,control3,control4,control5]  #resolution should always be last
 
     #Resolution
     res_list = [0.01,0.05,0.1,0.5,1,5,10,50,100]
