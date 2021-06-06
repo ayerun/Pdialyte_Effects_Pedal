@@ -1,4 +1,4 @@
-#N canvas 0 96 1920 1104 10;
+#N canvas 1920 96 1920 1104 10;
 #X obj 327 86 netreceive 3000;
 #X obj 45 275 * 0.05776;
 #X obj 45 308 exp;
@@ -62,6 +62,8 @@
 #X obj 758 371 +~;
 #X obj 919 266 s~ dry;
 #X obj 732 294 r~ dry;
+#X text 635 55 This patch is heavily based on Pd example G09 by Miller
+Puckette;
 #X connect 0 0 53 0;
 #X connect 1 0 2 0;
 #X connect 2 0 3 0;

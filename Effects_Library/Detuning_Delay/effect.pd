@@ -1,4 +1,4 @@
-#N canvas 0 96 1920 1104 12;
+#N canvas 0 69 1920 1011 12;
 #X obj 523 388 *~;
 #X obj 524 291 r~ out_del1;
 #X obj 524 431 delwrite~ del1 3000;
@@ -67,6 +67,9 @@
 #X msg 59 82 \; pd dsp 1;
 #X obj 245 229 / 100;
 #X obj 710 196 / 100;
+#X text 1042 28 This patch is almost entirely copied from Pierre Massat's
+detuning delay: https://guitarextended.wordpress.com/2012/07/08/detuning-delay/
+;
 #X connect 0 0 2 0;
 #X connect 1 0 0 0;
 #X connect 3 0 0 1;
