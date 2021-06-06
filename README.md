@@ -88,8 +88,8 @@ sudo cp ~/jetson-gpio/lib/python/Jetson/GPIO/99-gpio.rules /etc/udev/rules.d
 
 #### Creating New Sound Effects
 * Copy NEW_EFFECT_TEMPLATE directory
-* Modify <a href="https://github.com/ayerun/Guitar_Pedal/blob/master/Effects_Library/NEW_EFFECT_TEMPLATE/controls.py" target="_blank">controls.py</a> with your effect parameters
-    * There are detailed instructions in <a href="https://github.com/ayerun/Guitar_Pedal/blob/master/Effects_Library/NEW_EFFECT_TEMPLATE/controls.py" target="_blank">controls.py</a>
+* Modify <a href="https://github.com/ayerun/Pdialyte_Effects_Pedal/blob/master/Effects_Library/NEW_EFFECT_TEMPLATE/controls.py" target="_blank">controls.py</a> with your effect parameters
+    * There are detailed instructions in <a href="https://github.com/ayerun/Pdialyte_Effects_Pedal/blob/master/Effects_Library/NEW_EFFECT_TEMPLATE/controls.py" target="_blank">controls.py</a>
 * Create an effect.pd patch
 * See <a href="https://ayerun.github.io/Portfolio/Pdialyte.html" target="_blank">this portfolio post</a> for more details
     
