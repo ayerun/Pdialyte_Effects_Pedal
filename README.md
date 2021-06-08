@@ -71,7 +71,7 @@ sudo cp ~/jetson-gpio/lib/python/Jetson/GPIO/99-gpio.rules /etc/udev/rules.d
 1. Plug in Audio Interface
 2. Launch effect
 ```
-./<path_to_repo>/Effects_Library/<desire_sound_effect_directory>/start.sh
+./<path_to_repo>/Effects_Library/<desired_sound_effect_directory>/start.sh
 ```
 
 ## Repository Layout
